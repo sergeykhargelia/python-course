@@ -1,0 +1,14 @@
+$ python3 wc.py *.py
+ 26  87  805 nl.py
+ 48 132 1333 tail.py
+ 49 177 1745 wc.py
+123 396 3883 total
+
+$ cat wc.py | python3 wc.py
+49 177 1745
+
+$ python3 wc.py -
+a
+b
+c
+3 3 6

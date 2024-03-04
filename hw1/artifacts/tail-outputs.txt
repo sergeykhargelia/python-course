@@ -1,0 +1,67 @@
+$ python3 tail.py *.py
+==> nl.py <==
+    line_number = 1
+
+    for file_name in sys.argv[1:]:
+        try:
+            with open(file_name, 'r') as file:
+                for line in file:
+                    print(add_line_number(line.rstrip('\n'), line_number))
+                    line_number += 1
+        except FileNotFoundError:
+            print(file_name + ': no such file')
+
+==> tail.py <==
+            with open(file_name, 'r') as file:
+                if need_header:
+                    if was_success:
+                        print()
+                    print(f'==> {file_name} <==')
+
+                print(''.join(tail(file, NUMBER_OF_LINES_FOR_FILE)), end='')
+                was_success = True
+        except FileNotFoundError:
+            print(file_name + ': no such file')
+
+==> wc.py <==
+    for component in range(3):
+        total += (sum(stat[component] for stat in counts),)
+
+    counts.append(total + ('total',))
+
+    # calculate width for each type of info
+    l_width, w_width, c_width = (len(str(count)) for count in total)
+
+    for lines_count, words_count, characters_count, name in counts:
+        print(f'{lines_count:>{l_width}} {words_count:>{w_width}} {characters_count:>{c_width}} {name}')
+
+$ python3 tail.py wc.py
+    for component in range(3):
+        total += (sum(stat[component] for stat in counts),)
+
+    counts.append(total + ('total',))
+
+    # calculate width for each type of info
+    l_width, w_width, c_width = (len(str(count)) for count in total)
+
+    for lines_count, words_count, characters_count, name in counts:
+        print(f'{lines_count:>{l_width}} {words_count:>{w_width}} {characters_count:>{c_width}} {name}')
+
+$ cat nl.py | python3 tail.py
+    
+if len(sys.argv) == 1 or sys.argv[1] == '-':
+    # there is no files, read from stdin
+    for number, line in enumerate(sys.stdin, start=1):
+        print(add_line_number(line.rstrip('\n'), number))
+else:
+    # common line number for all files
+    line_number = 1
+
+    for file_name in sys.argv[1:]:
+        try:
+            with open(file_name, 'r') as file:
+                for line in file:
+                    print(add_line_number(line.rstrip('\n'), line_number))
+                    line_number += 1
+        except FileNotFoundError:
+            print(file_name + ': no such file')

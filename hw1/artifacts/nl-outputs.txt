@@ -1,0 +1,62 @@
+$ python3 nl.py nl.py
+     1	import sys
+     2	from typing import Final
+     3	
+     4	# default parameters of nl command
+     5	NUMBER_WIDTH: Final = 6
+     6	SEPARATOR: Final = '\t'
+     7	
+     8	def add_line_number(line, number):
+     9	    return f'{number:>{NUMBER_WIDTH}}{SEPARATOR}{line}'
+    10	    
+    11	if len(sys.argv) == 1 or sys.argv[1] == '-':
+    12	    # there is no files, read from stdin
+    13	    for number, line in enumerate(sys.stdin, start=1):
+    14	        print(add_line_number(line.rstrip('\n'), number))
+    15	else:
+    16	    # common line number for all files
+    17	    line_number = 1
+    18	
+    19	    for file_name in sys.argv[1:]:
+    20	        try:
+    21	            with open(file_name, 'r') as file:
+    22	                for line in file:
+    23	                    print(add_line_number(line.rstrip('\n'), line_number))
+    24	                    line_number += 1
+    25	        except FileNotFoundError:
+    26	            print(file_name + ': no such file')
+
+$ python3 nl.py -
+a
+     1  a
+b
+     2  b
+
+$ cat nl.py | python3 nl.py
+     1	import sys
+     2	from typing import Final
+     3	
+     4	# default parameters of nl command
+     5	NUMBER_WIDTH: Final = 6
+     6	SEPARATOR: Final = '\t'
+     7	
+     8	def add_line_number(line, number):
+     9	    return f'{number:>{NUMBER_WIDTH}}{SEPARATOR}{line}'
+    10	    
+    11	if len(sys.argv) == 1 or sys.argv[1] == '-':
+    12	    # there is no files, read from stdin
+    13	    for number, line in enumerate(sys.stdin, start=1):
+    14	        print(add_line_number(line.rstrip('\n'), number))
+    15	else:
+    16	    # common line number for all files
+    17	    line_number = 1
+    18	
+    19	    for file_name in sys.argv[1:]:
+    20	        try:
+    21	            with open(file_name, 'r') as file:
+    22	                for line in file:
+    23	                    print(add_line_number(line.rstrip('\n'), line_number))
+    24	                    line_number += 1
+    25	        except FileNotFoundError:
+    26	            print(file_name + ': no such file')
+
