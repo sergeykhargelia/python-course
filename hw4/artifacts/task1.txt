@@ -1,0 +1,3 @@
+time for threading: 18.459182635007892
+time for multiprocessing: 5.699457949027419
+time for synchronous: 17.36176354001509
